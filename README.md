@@ -85,7 +85,7 @@ The contents of this repository contribute to solving the last part of the code 
     + The testing included in the app dev env really only makes sure that the app components don't crash on render. If I had more time I would have made the tests more comprehensive.
 * *Bundle your module with webpack or parcel.*
     + I've never done this before. I've relied on `create-react-app` without bundling because I've only built smaller projects from scratch until now.
-    + I know that `create-react-app` uses Webpack and Babel, so technically it's halfway there, but I understand that the intention of th code test was to see that I could bundle and deploy.
+    + I know that `create-react-app` uses Webpack and Babel, so technically it's halfway there, but I understand that the intention of the code test was to see that I could bundle and deploy.
     + I've created another project where I've tried to use Parcel to bundle the app code, however I couldn't get tailwindcss to work with it, so I resorted to this solution instead.
 
 ### Component sneak peak
