@@ -3,9 +3,9 @@ import { PaymentPage } from './containers'
 
 function App() {
   return (
-      <div data-testid={'app'} className={'container'}>
-        <PaymentPage />
-      </div>
+    <div data-testid={'app'} className={'container'}>
+      <PaymentPage />
+    </div>
   )
 }
 
