@@ -131,8 +131,8 @@ const PaymentForm = () => {
                 <select
                   className={
                     touched.cardExpMonth && errors.cardExpMonth
-                      ? 'errorBorder'
-                      : ''
+                      ? 'errorBorder w-full'
+                      : 'w-full'
                   }
                   name={'cardExpMonth'}
                   value={values.cardExpMonth}
@@ -155,8 +155,8 @@ const PaymentForm = () => {
                 <select
                   className={
                     touched.cardExpYear && errors.cardExpYear
-                      ? 'errorBorder'
-                      : ''
+                      ? 'errorBorder '
+                      : 'w-full'
                   }
                   name={'cardExpYear'}
                   value={values.cardExpYear}
