@@ -20,6 +20,7 @@
     "yup": "^0.32.8"
   },
   "scripts": {
+    "format": "yarn prettier --write .",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
