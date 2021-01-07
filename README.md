@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# Queenslab codetest
+This is my attempt at the [Queenslab frontend code challenge](https://github.com/QueensLabOpen/EvaluationAssignment/tree/master/Frontend), consisting of two parts:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [Algorithms](#algorithms)
+- [Components](#components)
+    
+## Algorithms
 
-## Available Scripts
+### First algorithm
 
-In the project directory, you can run:
+#### Task
+Write a function that finds and removes instances of four identical consecutive lowercase letters. The function should delete as a few letters as possible.
 
-### `yarn start`
+Assume that the maximum length of the string is 150 000 however please elaborate on changes you would do if the maximum length would be 20 million or higher?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Solution
+```
+function removeRecurring(str) {
+  if (typeof str === 'string') {
+    return str.replaceAll(/([a-zåäö])\1{3}/g, '$1$1$1')
+  } else return console.log('Given value is not a string 😜')
+}
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The above function uses regular expression to target groups within a given string, where the three following characters are identical to the first, totalling in four identical consecutive lowercase characters per group.
 
-### `yarn test`
+The built in Js function replaceAll then uses the same regex reference to replace all identified groups with instances of four consecutive and identical lowercase characters with three characters of the same type.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The worst case time complexity for this function should be O(n) regardless of the number of characters within the given string, because the search is linear. I wasn't really sure how to improve on this further when comparing a string of for example 150k characters to a string of 20 million characters, seeing as I would still have to search the string from beginning to end.
 
-### `yarn build`
+### Second algorithm
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Task
+Write a function that takes an array of numbers and returns the maximum sum of two numbers whose digits have an odd sum.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Assume that the array contains between 1 and 150 000 elements and that each element is within the range of 1 to 1 500 000.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Solution
+```
+function getMaxOddSum(arr) {
+  let maxEven = null
+  let maxOdd = null
+  let impossible = false
 
-### `yarn eject`
+  arr.sort((a, b) => {
+    return a - b
+  })
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  for (let num = arr.length - 1; num >= 0; num--) {
+    if (arr[num] % 2 === 0 && maxEven == null) {
+      maxEven = arr[num]
+    } else if (arr[num] % 2 !== 0 && maxOdd == null) {
+      maxOdd = arr[num]
+    } else if (num === 0) {
+      impossible = true
+    } else break
+  }
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  if (impossible === true && (maxEven === null || maxOdd === null)) {
+    return console.log('Impossible to calculate 🥺')
+  } else return maxEven + maxOdd
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This function sorts the contents of a given array by size. It then loops through the array, starting at the end (largest), and looks for the largest two even and odd numbers. The value returned by the function is the sum of these two numbers (because an odd sum always has one even and one odd addend).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The for loop should also be able to handle situations where a calculation is not possible, i.e. if the array is of length 1, or if all the indexes in the array contain either even or odd numbers. The function then logs in the console that a calculation can not be made from the given array.
 
-## Learn More
+## Components
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Task
+Create a credit card form for submitting payments. Use either React or Vue and bundle it using either webpack or parcel and deploy it to a cloud provider of your choosing. If you're unsure we can recommend Netlify or Heroku. Focus should be on validation and ease of use.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Consider what we can validate / detect without making a request to the payment server.
+* Include unit / e2e tests
+* Bundle your module with webpack or parcel.
 
-### Code Splitting
+### Solution
+The contents of this repository contribute to solving the last part of the code challenge, together with [this live example](https://livmari.github.io/queenslab-codetest/). I hope Github pages is a good enough solution for a cloud provider.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* *Consider what we can validate / detect without making a request to the payment server.*
+    + I used Yup and Formik to validate the form input data, as well as some basic css to indicate to the end-user if something has gone wrong.
+    + The only thing I didn't think to validate was the card type (i.e. 'Visa', 'Mastercard', etc), mainly because I didn't have the time to. Had this been done it would have ensured that the card number length corresponded to the card type.
+* *Include unit / e2e tests*
+    + The testing included in the app dev env really only makes sure that the app components don't crash on render. If I had more time I would have made the tests more comprehensive.
+* *Bundle your module with webpack or parcel.*
+    + I've never done this before. I've relied on `create-react-app` without bundling because I've only built smaller projects from scratch until now.
+    + I know that `create-react-app` uses Webpack and Babel, so technically it's halfway there, but I understand that the intention of th code test was to see that I could bundle and deploy.
+    + I've created another project where I've tried to use Parcel to bundle the app code, however I couldn't get tailwindcss to work with it, so I resorted to this solution instead.
 
-### Analyzing the Bundle Size
+### Component sneak peak
+[Click here for live example](https://livmari.github.io/queenslab-codetest/), or visit https://livmari.github.io/queenslab-codetest/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![](images/form-trailer.png)
