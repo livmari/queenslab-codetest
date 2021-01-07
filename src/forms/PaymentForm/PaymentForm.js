@@ -52,7 +52,7 @@ const PaymentForm = () => {
           }
         >
           {/* Form data visualization */}
-          <div className={'flex items-center justify-center'}>
+          <div className={'hidden sm:flex sm:items-center sm:justify-center'}>
             <CreditCard
               num={values.cardNum}
               name={values.cardName}
@@ -60,6 +60,15 @@ const PaymentForm = () => {
               expYear={values.cardExpYear}
               cvv={values.cardCvv}
             />
+          </div>
+
+          <div
+            className={
+              'sm:hidden bg-gray-50 border rounded-md shadow-sm text-gray-700 p-8 font-medium text-center text-sm'
+            }
+          >
+            Please open me in a window wider than 640 pixels to see the
+            interactive card 💕
           </div>
 
           {/* Form fields */}
