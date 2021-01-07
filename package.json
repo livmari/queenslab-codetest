@@ -1,53 +1,57 @@
 {
   "homepage": "https://livmari.github.io/queenslab-codetest/",
   "name": "queenslab-codetest",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "repository": "https://github.com/livmari/queenslab-codetest.git",
+  "author": "livm <livm@student.chalmers.se>",
+  "license": "MIT",
   "dependencies": {
-    "@craco/craco": "^6.0.0",
     "@tailwindcss/postcss7-compat": "^2.0.2",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "autoprefixer": "^9",
     "formik": "^2.2.6",
     "postcss": "^7",
+    "postcss-loader": "^4.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
     "tailwindcss": "yarn:@tailwindcss/postcss7-compat",
-    "web-vitals": "^0.2.4",
     "yup": "^0.32.8"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "@testing-library/jest-dom": "^5.11.8",
+    "@testing-library/react": "^11.2.2",
+    "babel-jest": "^26.6.3",
+    "gh-pages": "^3.1.0",
+    "jest": "^26.6.3",
+    "jest-css-modules-transform": "^4.1.0",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "2.2.1",
+    "react-test-renderer": "^17.0.1"
   },
   "scripts": {
     "format": "yarn prettier --write .",
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject",
-    "predeploy": "yarn run build",
+    "test": "jest",
+    "dev": "parcel public/index.html",
+    "build": "parcel build public/index.html",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+  "jest": {
+    "verbose": true,
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      ".+\\.(css|styl|less|sass|scss)$": "jest-css-modules-transform"
+    },
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+    "moduleDirectories": [
+      "node_modules"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^3.1.0",
-    "prettier": "2.2.1"
   }
 }
