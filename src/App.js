@@ -1,12 +1,17 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import { PaymentPage } from './containers'
 
-function App() {
+import './index.css'
+
+const App = () => {
   return (
-    <div data-testid={'app'} className={'container'}>
+    <div>
       <PaymentPage />
     </div>
   )
 }
+
+ReactDOM.render(<App />, document.getElementById('root'))
 
 export default App
