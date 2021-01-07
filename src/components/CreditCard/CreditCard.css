@@ -1,0 +1,15 @@
+.credit-card {
+  height: 271px;
+  width: 430px;
+  background-image: linear-gradient(112.1deg, #202639 11.4%, #3f4c77 70%);
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+@media only screen and (max-width: 500px) {
+  .credit-card {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=CreditCard.css.map */
